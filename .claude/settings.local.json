@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:claude.ai)",
+      "Read(//home/uka/.config/**)",
+      "Read(//home/uka/.claude/**)",
+      "Bash(python3 -m json.tool)",
+      "Bash(xargs ls -la)",
+      "Bash(python3 *)"
+    ]
+  }
+  
+}

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>学習教材ブックマーク</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: #f5f4f1;
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+      color: #23252a;
+      padding: 28px 20px 56px;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e4e2dd;
+      margin-bottom: 22px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    header .subtitle {
+      font-size: 13.5px;
+      color: #7c7e84;
+      font-weight: 500;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      flex: 1 1 auto;
+      min-width: 94px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 1px solid #e2e0db;
+      background: #ffffff;
+      color: #5e6065;
+      box-shadow: none;
+      transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .tab-btn .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .tab-btn.active {
+      color: #ffffff;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 18px;
+    }
+    .section-bar {
+      display: inline-block;
+      width: 6px;
+      height: 24px;
+      border-radius: 3px;
+    }
+    .section-header h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .pill {
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 3px 11px;
+      border-radius: 999px;
+    }
+
+    .hint {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: #86888e;
+    }
+
+    .sites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+      gap: 13px;
+    }
+
+    .site-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 82px;
+      padding: 18px;
+      background: #ffffff;
+      border: 1px solid #e7e5e0;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #23252a;
+      font-weight: 600;
+      font-size: 16.5px;
+      line-height: 1.4;
+      transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+    }
+    .site-card:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+      transform: translateY(-2px);
+    }
+    .site-card .mark {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .site-card .name {
+      flex: 1;
+    }
+    .site-card .arrow {
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid #e4e2dd;
+      font-size: 12px;
+      color: #9a9ca1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>学習教材リスト(2026年6月25日更新)</h1>
+    </header>
+
+    <nav id="tabs"></nav>
+
+    <section>
+      <div class="section-header">
+        <span class="section-bar" id="section-bar"></span>
+        <h2 id="section-title"></h2>
+        <span class="pill" id="section-pill"></span>
+      </div>
+      <div class="sites-grid" id="sites-grid"></div>
+    </section>
+  </div>
+
+  <script>
+    const SUBJECTS = [
+      { key: 'kokugo', name: '国語', color: '#c8443a', tint: '#fbeceb', sites: [
+        { name: 'ことばの森プリント', url: 'https://kokugo-mori.example.com' },
+        { name: '漢字ドリル工房', url: 'https://kanji-drill.example.com' },
+        { name: '読解力アップ広場', url: 'https://dokkai-up.example.com' },
+        { name: '古典びより', url: 'https://koten-biyori.example.com' },
+        { name: '作文サポートネット', url: 'https://sakubun-support.example.com' },
+      ]},
+      { key: 'sugaku', name: '数学', color: '#2f6cc4', tint: '#eaf1fb', sites: [
+        { name: '計算トレーニング道場', url: 'https://keisan-dojo.example.com' },
+        { name: '図形マスター', url: 'https://zukei-master.example.com' },
+        { name: '数式チャレンジ', url: 'https://sushiki-challenge.example.com' },
+        { name: '文章題ラボ', url: 'https://bunshodai-lab.example.com' },
+        { name: 'グラフの教室', url: 'https://graph-class.example.com' },
+      ]},
+      { key: 'eigo', name: '英語', color: '#bd8910', tint: '#fbf2d8', sites: [
+        { name: '英単語クエスト', url: 'https://tango-quest.example.com' },
+        { name: '文法ナビ', url: 'https://bunpou-navi.example.com' },
+        { name: 'リスニングの泉', url: 'https://listening-izumi.example.com' },
+        { name: '英作文スタジオ', url: 'https://eisakubun-studio.example.com' },
+        { name: 'フォニックス広場', url: 'https://phonics-hiroba.example.com' },
+      ]},
+      { key: 'rika', name: '理科', color: '#2f8a57', tint: '#e9f5ee', sites: [
+        { name: '実験ノート', url: 'https://jikken-note.example.com' },
+        { name: '理科プリント館', url: 'https://rika-print.example.com' },
+        { name: '自然のしくみ図鑑', url: 'https://shizen-zukan.example.com' },
+        { name: '化学式トレーナー', url: 'https://kagakushiki-trainer.example.com' },
+        { name: '天体観測室', url: 'https://tentai-room.example.com' },
+      ]},
+      { key: 'shakai', name: '社会', color: '#97683c', tint: '#f3eae0', sites: [
+        { name: '歴史年表ステーション', url: 'https://rekishi-station.example.com' },
+        { name: '地理マップ学習', url: 'https://chiri-map.example.com' },
+        { name: '公民ドリル', url: 'https://koumin-drill.example.com' },
+        { name: '地図記号クイズ', url: 'https://chizukigo-quiz.example.com' },
+        { name: '時事ニュース教室', url: 'https://jiji-news.example.com' },
+      ]},
+    ];
+
+    let active = 0;
+
+    function hexToRgba(hex, a) {
+      const h = hex.replace('#', '');
+      const r = parseInt(h.substring(0, 2), 16);
+      const g = parseInt(h.substring(2, 4), 16);
+      const b = parseInt(h.substring(4, 6), 16);
+      return `rgba(${r},${g},${b},${a})`;
+    }
+
+    function renderTabs() {
+      const nav = document.getElementById('tabs');
+      nav.innerHTML = '';
+      SUBJECTS.forEach((s, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'tab-btn' + (i === active ? ' active' : '');
+        btn.style.borderColor = i === active ? s.color : '#e2e0db';
+        btn.style.background = i === active ? s.color : '#ffffff';
+        btn.style.color = i === active ? '#ffffff' : '#5e6065';
+        btn.style.boxShadow = i === active ? `0 3px 9px ${hexToRgba(s.color, 0.30)}` : 'none';
+
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        dot.style.background = i === active ? '#ffffff' : s.color;
+
+        btn.appendChild(dot);
+        btn.appendChild(document.createTextNode(s.name));
+        btn.addEventListener('click', () => { active = i; render(); });
+        nav.appendChild(btn);
+      });
+    }
+
+    function renderSection() {
+      const s = SUBJECTS[active];
+
+      const bar = document.getElementById('section-bar');
+      bar.style.background = s.color;
+
+      document.getElementById('section-title').textContent = s.name;
+
+      const pill = document.getElementById('section-pill');
+      pill.textContent = `全${s.sites.length}サイト`;
+      pill.style.background = s.tint;
+      pill.style.color = s.color;
+
+      const grid = document.getElementById('sites-grid');
+      grid.innerHTML = '';
+      s.sites.forEach(site => {
+        const a = document.createElement('a');
+        a.className = 'site-card';
+        a.href = site.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.style.borderLeft = `5px solid ${s.color}`;
+        a.addEventListener('mouseenter', () => {
+          a.style.borderColor = s.color;
+        });
+        a.addEventListener('mouseleave', () => {
+          a.style.borderColor = '#e7e5e0';
+          a.style.borderLeftColor = s.color;
+        });
+
+        const mark = document.createElement('span');
+        mark.className = 'mark';
+        mark.style.background = s.color;
+
+        const name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = site.name;
+
+        const arrow = document.createElement('span');
+        arrow.className = 'arrow';
+        arrow.style.color = s.color;
+        arrow.textContent = '↗';
+
+        a.appendChild(mark);
+        a.appendChild(name);
+        a.appendChild(arrow);
+        grid.appendChild(a);
+      });
+    }
+
+    function render() {
+      renderTabs();
+      renderSection();
+    }
+
+    render();
+  </script>
+</body>
+</html>
