@@ -6,8 +6,8 @@
       "Read(//home/uka/.claude/**)",
       "Bash(python3 -m json.tool)",
       "Bash(xargs ls -la)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(pip install *)"
     ]
   }
-  
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>学習教材ブックマーク</title>
+  <title>教材リスト</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -182,43 +182,38 @@
   <script>
     const SUBJECTS = [
       { key: 'kokugo', name: '国語', color: '#c8443a', tint: '#fbeceb', sites: [
-        { name: 'ことばの森プリント', url: 'https://kokugo-mori.example.com' },
-        { name: '漢字ドリル工房', url: 'https://kanji-drill.example.com' },
-        { name: '読解力アップ広場', url: 'https://dokkai-up.example.com' },
-        { name: '古典びより', url: 'https://koten-biyori.example.com' },
-        { name: '作文サポートネット', url: 'https://sakubun-support.example.com' },
+        { name: '学力向上ワークシート 国語（中学校） - 埼玉県', url: 'https://www.pref.saitama.lg.jp/g2204/gakuryokukoujou/worksheet/h27wa-kushi-to-cyuu-kokugo.html' },
+        { name: '漢字でGO!を遊ぶ！ フリーゲームのPLiCy [プリシー]', url: 'https://plicy.net/GamePlay/155561' },
       ]},
       { key: 'sugaku', name: '数学', color: '#2f6cc4', tint: '#eaf1fb', sites: [
-        { name: '計算トレーニング道場', url: 'https://keisan-dojo.example.com' },
-        { name: '図形マスター', url: 'https://zukei-master.example.com' },
-        { name: '数式チャレンジ', url: 'https://sushiki-challenge.example.com' },
-        { name: '文章題ラボ', url: 'https://bunshodai-lab.example.com' },
-        { name: 'グラフの教室', url: 'https://graph-class.example.com' },
+        { name: '中学校数学・学習サイト', url: 'https://math.005net.com/' },
+        { name: '【高校数学】例題＆問題集', url: 'https://web.math-aquarium.jp/' },
+        { name: '検定過去問題 | 数学検定・算数検定（実用数学技能検定）', url: 'https://www.su-gaku.net/suken/support/past_questions/' },
       ]},
       { key: 'eigo', name: '英語', color: '#bd8910', tint: '#fbf2d8', sites: [
-        { name: '英単語クエスト', url: 'https://tango-quest.example.com' },
-        { name: '文法ナビ', url: 'https://bunpou-navi.example.com' },
-        { name: 'リスニングの泉', url: 'https://listening-izumi.example.com' },
-        { name: '英作文スタジオ', url: 'https://eisakubun-studio.example.com' },
-        { name: 'フォニックス広場', url: 'https://phonics-hiroba.example.com' },
+        { name: '中学英語・練習問題', url: 'https://english.005net.com/mondai.php' },
+        { name: '中学英語 練習問題プリント集 【ちびふたEnglish】', url: 'https://happylilac.net/english.html' },
+        { name: '単語テスト', url: '#' },
       ]},
       { key: 'rika', name: '理科', color: '#2f8a57', tint: '#e9f5ee', sites: [
-        { name: '実験ノート', url: 'https://jikken-note.example.com' },
-        { name: '理科プリント館', url: 'https://rika-print.example.com' },
-        { name: '自然のしくみ図鑑', url: 'https://shizen-zukan.example.com' },
-        { name: '化学式トレーナー', url: 'https://kagakushiki-trainer.example.com' },
-        { name: '天体観測室', url: 'https://tentai-room.example.com' },
+        { name: '中学1年生「理科」学習プリント練習問題 | 無料ダウンロード印刷', url: 'https://startoo.co/workbook/140746/' },
       ]},
       { key: 'shakai', name: '社会', color: '#97683c', tint: '#f3eae0', sites: [
-        { name: '歴史年表ステーション', url: 'https://rekishi-station.example.com' },
-        { name: '地理マップ学習', url: 'https://chiri-map.example.com' },
-        { name: '公民ドリル', url: 'https://koumin-drill.example.com' },
-        { name: '地図記号クイズ', url: 'https://chizukigo-quiz.example.com' },
-        { name: '時事ニュース教室', url: 'https://jiji-news.example.com' },
+        { name: '中学社会問題プリント', url: 'https://study.005net.com/social/m-so3.php' },
+        { name: '中学生「社会」学習プリント・問題集 | 無料ダウンロード印刷', url: 'https://startoo.co/workbook/140177/' },
+      ]},
+      { key: 'iroiro', name: 'いろいろ', color: '#7952a6', tint: '#f0ebf8', sites: [
+        { name: '小テストジェネレーター', url: 'https://www.printgenerator.net/' },
+        { name: 'ちびむすドリル【小学生】', url: 'https://happylilac.net/syogaku.html' },
+        { name: 'ちびむすドリル【中学生】', url: 'https://happylilac.net/highschool.html' },
+        { name: 'すたぺんドリル | 幼児～小学生学習プリント 無料ダウンロード・印刷', url: 'https://startoo.co/sutapen/' },
+        { name: '【中学生】学習プリント・問題集 一覧 | 無料ダウンロード・印刷(すたぺんドリル)', url: 'https://startoo.co/juniorhighschool/' },
+        { name: 'QuizGenerator', url: 'https://quizgenerator.net/' },
+        { name: '【ITパスポート試験】過去問題（問題冊子・解答例）', url: 'https://www3.jitec.ipa.go.jp/JitesCbt/html/openinfo/questions.html' },
       ]},
     ];
 
-    let active = 0;
+    let active = SUBJECTS.findIndex(s => s.key === 'iroiro');
 
     function hexToRgba(hex, a) {
       const h = hex.replace('#', '');
